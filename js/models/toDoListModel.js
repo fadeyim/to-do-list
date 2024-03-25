@@ -12,15 +12,15 @@ console.log(observers)
 }
 
 export function notify(data){
-    observers.forEach((observer) => observer(data))
+    observers.forEach((observer) => observer(data));
 }
 
 export async function getToDoData(){
-    const dbRef = ref(db, 'todos')
-    const response = await get(dbRef)
-    let payload = await response.val()
+    const dbRef = ref(db, 'todos');
+    const response = await get(dbRef);
+    let payload = await response.val();
     //console.log(payload); //use for testing
-    payload = Object.entries(payload)
+    payload = Object.entries(payload);
     //console.log(payload); //use for testing
     let toDoItems = payload.map((item) => {
         return {...item[1], uid: item[0]}
@@ -44,8 +44,8 @@ export function deleteToDo(uid){
 
 export function updateToDo(updatedToDo){
     let payload = updatedToDo;
-    const dbRef = ref(db, `todos/${payload.uid}`)
-    update(dbRef, payload)
+    const dbRef = ref(db, `todos/${payload.uid}`);
+    update(dbRef, payload);
     const store = updateStore(payload);
     notify(store);
 }
