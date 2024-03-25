@@ -3,7 +3,7 @@ let instance;
 
 const createStore = async (todos) => {
     if(instance){
-        throw new Error('New Isntance cannot be created!!')
+        throw new Error('New Isntance cannot be created!!');
     }
 
     instance = 1;
@@ -17,12 +17,17 @@ const createStore = async (todos) => {
 1
 
 const getStore = () => {
-    return store;1
-}
-
-const removeFromStore = (uid) => {
-    store = store.filter((item) => item.uid !== uid)
     return store;
 }
 
-export{getStore, createStore, removeFromStore}
+const removeFromStore = (uid) => {
+    store = store.filter((item) => item.uid !== uid);
+    return store;
+}
+
+const updateStore = (todo) => {
+       const index = store.findIndex((item) => item.uid === todo.uid);
+       store = [...store.slice(0, index), todo, ...store.slice(index + 1)];
+}
+
+export{getStore, createStore, removeFromStore, updateStore}
