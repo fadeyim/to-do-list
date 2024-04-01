@@ -37,7 +37,7 @@ export async function getToDoData(){
 
 export function deleteToDo(uid){
     const dbRef = ref(db, `todos/${uid}`);
-    remove(dbRef);``
+    remove(dbRef);
     const store = removeFromStore(uid);
     notify(store);
 }
@@ -48,4 +48,13 @@ export function updateToDo(updatedToDo){
     update(dbRef, payload);
     const store = updateStore(payload);
     notify(store);
+}
+
+export function createToDo(createNewToDo){
+    let payload = createNewToDo;
+    const dbRef = ref(db, `todos`);
+    push(dbRef, payload);
+    const store = updateStore(payload);
+    notify(store);
+    console.log("createToDo");
 }
